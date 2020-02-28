@@ -7,7 +7,3 @@ test('renders learn react link', () => {
   expect(getByText('WHERE TO LUNCH?')).toBeInTheDocument();
 });
 
-test('shows a lunch spot suggestion', () => {
-  const { getByText } = render(<App />);
-  fireEvent.click(screen.getByLabelText(/FIND ME A SPOT!/i))
-});
