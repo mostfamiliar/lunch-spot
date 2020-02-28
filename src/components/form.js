@@ -1,10 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import { FormLabel } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 class Form extends React.Component {
     constructor(props){
@@ -16,6 +14,7 @@ class Form extends React.Component {
                 link: ""
         }
 
+        this.error = null;
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -40,39 +39,41 @@ class Form extends React.Component {
             },
             body: JSON.stringify(this.state)
         })
-        .then((response) => {
-            console.log(response)
-        })
-        .then((results) => {
-            console.log(results)
+        .then((response) => response.json())
+        .then((result) => {
+            this.props.newSpot(result)
             this.props.toggleViewMethod(false)
         })
         .catch((error) => {
-            console.log(error)
+           this.error = error;
         })
 
     }
     
     render() {
+        if (this.state.error) {
+            return <h1>Sorry an issue has been encountered.</h1>
+        }
         return (
-            <form autoComplete="off" onSubmit={this.handleSubmit}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <TextField id="standard-basic" label="Name" size="medium" name="name" value={this.state.name} onChange={this.handleChange} />
+
+            <ValidatorForm ref="form" onSubmit={this.handleSubmit} onError={errors => console.log(errors)}>
+                <Grid container spacing={2} width="75%">
+                    <Grid container item xs={12} >
+                        <TextValidator id="standard-basic" label="Name" width="75%" size="medium" name="name" value={this.state.name} onChange={this.handleChange} validators={['required']} errorMessages={['this field is required', 'email is not valid']} />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField id="standard-basic" label="Description" name="description" value={this.state.description} onChange={this.handleChange} />
+                        <TextValidator id="standard-basic" label="Description" name="description" value={this.state.description} onChange={this.handleChange} validators={['required']} errorMessages={['this field is required', 'email is not valid']} />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField id="standard-basic" label="Address" name="address" value={this.state.address} onChange={this.handleChange} />
+                        <TextValidator id="standard-basic" label="Address" name="address" value={this.state.address} onChange={this.handleChange} validators={['required']} errorMessages={['this field is required', 'email is not valid']} />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField id="standard-basic" label="Link" name="link" value={this.state.link} onChange={this.handleChange} />
+                        <TextValidator id="standard-basic" label="Link" name="link" value={this.state.link} onChange={this.handleChange} validators={['required']} errorMessages={['this field is required', 'email is not valid']} />
                     </Grid>
                 </Grid>
                 <Button color="primary" type="submit" value="Submit">Submit</Button>
                 <Button color="primary" onClick={() => this.props.toggleViewMethod(false)}>Cancel</Button>
-            </form>
+            </ValidatorForm>
         )
     }
 }
