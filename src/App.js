@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Lunchspot from './components/lunchspot'
+import Form from './components/form'
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
+import { Grid } from '@material-ui/core';
 import { spacing } from '@material-ui/system';
 import './App.css';
 
@@ -9,7 +11,8 @@ class App extends Component {
   state = {
     lunchSpots: [],
     newLunchSpot: {},
-    randomLunchSpot: {}
+    randomLunchSpot: {},
+    addNewSpot: false
   }
 
   componentDidMount() {
@@ -19,6 +22,9 @@ class App extends Component {
       this.state.lunchSpots = results
       this.lunchSpotRandomizer()
     })
+    .catch((error) => {
+
+    });
   }
 
   lunchSpotRandomizer = () => {
@@ -26,16 +32,33 @@ class App extends Component {
     this.setState({randomLunchSpot: randomLunchSpot})
   }
 
+  showForm = () => {
+    this.setState({addNewSpot:true})
+    console.log(this.state.addNewSpot)
+  }
+
   render() {
     return (
-      <Container maxWidth="sm">
-        <h1>WHERE TO LUNCH?</h1>
-        <p>A simple randomizer to find a restaurant.</p>
-        <Lunchspot my={10} data={this.state.randomLunchSpot} />
-        <Button my={10} variant="contained" color="primary" onClick={this.lunchSpotRandomizer}>
-          Find me a spot!
-        </Button>
-      </Container>
+      <Grid container spacing={3} justify="center">
+        <Grid container item xs={12}>
+          <h1>WHERE TO LUNCH?</h1>
+        </Grid>
+        <Grid container item xs={12}>
+          {this.state.addNewSpot ? (
+            <Form />
+          ) : (
+            <Lunchspot my={10} data={this.state.randomLunchSpot} />
+          )}
+        </Grid>
+        <Grid container item xs={12}>
+          <Button m={10} variant="contained" color="primary" onClick={this.lunchSpotRandomizer}>
+            Find me a spot!
+          </Button>
+          <Button m={10} variant="contained" onClick={this.showForm}>
+            Add a new restaurant
+          </Button>
+        </Grid>
+      </Grid>
     );
   }
 }
