@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import Lunchspot from './components/lunchspot'
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
@@ -8,7 +9,8 @@ import './App.css';
 class App extends Component {
   state = {
     lunchSpots: [],
-    newLunchSpot: {}
+    newLunchSpot: {},
+    randomLunchSpot: {}
   }
 
   componentDidMount() {
@@ -16,14 +18,23 @@ class App extends Component {
     .then((response) => response.json())
     .then((results) => {
       this.state.lunchSpots = results
+      this.lunchSpotRandomizer()
     })
+  }
+
+  lunchSpotRandomizer = () => {
+    let randomLunchSpot = this.state.lunchSpots[Math.floor(Math.random() * this.state.lunchSpots.length)]
+    this.setState({randomLunchSpot: randomLunchSpot})
+    console.log(this.state)
   }
 
   render() {
     return (
       <Container maxWidth="sm">
         <h1>Where to lunch?</h1>
-        <Button variant="contained" color="primary">
+        <p>A simple randomizer to find a restaurant.</p>
+        <Lunchspot data={this.state.randomLunchSpot} />
+        <Button variant="contained" color="primary" onClick={this.lunchSpotRandomizer}>
           Find me a spot!
         </Button>
       </Container>
