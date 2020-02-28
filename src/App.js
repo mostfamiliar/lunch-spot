@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Lunchspot from './components/lunchspot'
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
+import { spacing } from '@material-ui/system';
 import './App.css';
 
 class App extends Component {
@@ -30,10 +29,10 @@ class App extends Component {
   render() {
     return (
       <Container maxWidth="sm">
-        <h1>Where to lunch?</h1>
+        <h1>WHERE TO LUNCH?</h1>
         <p>A simple randomizer to find a restaurant.</p>
-        <Lunchspot data={this.state.randomLunchSpot} />
-        <Button variant="contained" color="primary" onClick={this.lunchSpotRandomizer}>
+        <Lunchspot my={10} data={this.state.randomLunchSpot} />
+        <Button my={10} variant="contained" color="primary" onClick={this.lunchSpotRandomizer}>
           Find me a spot!
         </Button>
       </Container>

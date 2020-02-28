@@ -1,9 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
@@ -13,6 +11,7 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Badge from '@material-ui/core/Badge';
 
 
 class Lunchspot extends React.Component {
@@ -64,7 +63,7 @@ class Lunchspot extends React.Component {
                 </IconButton>
               }
               title={this.props.data.name}
-              subheader="September 14, 2016"
+              subheader={this.props.data.address}
             />
             <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
@@ -72,10 +71,10 @@ class Lunchspot extends React.Component {
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites">
+              <Badge badgeContent={this.props.data.votes} color="primary">
                 <FavoriteIcon />
-              </IconButton>
-              <IconButton aria-label="share">
+              </Badge>
+              <IconButton aria-label="share" href={this.props.data.link} target="_blank">
                 <ShareIcon />
               </IconButton>
             </CardActions>
