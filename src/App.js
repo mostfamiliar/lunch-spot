@@ -11,6 +11,13 @@ class App extends Component {
     newLunchSpot: {}
   }
 
+  componentDidMount() {
+    fetch("http://localhost:8888/suggestions")
+    .then((response) => response.json())
+    .then((results) => {
+      this.state.lunchSpots = results
+    })
+  }
 
   render() {
     return (
