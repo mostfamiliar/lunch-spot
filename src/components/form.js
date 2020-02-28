@@ -10,12 +10,10 @@ class Form extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            lunchSpot: {
-                name: null,
-                description: null,
-                address: null,
-                link: null
-            }
+                name: "",
+                description: "",
+                address: "",
+                link: ""
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -23,44 +21,58 @@ class Form extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({lunchSpot: event.target.value});
+        const target = event.target;
+        const value = target.value
+        const name = target.name;
+    
+        this.setState({
+          [name]: value
+        });
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state)
         fetch("http://localhost:8888/suggestions", {
             method: 'post',
-            body: JSON.stringify(this.state.lunchSpot)
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.state)
         })
-        .then((response) => response.json())
+        .then((response) => {
+            console.log(response)
+        })
         .then((results) => {
-          console.log(results)
+            console.log(results)
+            this.props.toggleViewMethod(false)
         })
+        .catch((error) => {
+            console.log(error)
+        })
+
     }
     
     render() {
         return (
-
             <form autoComplete="off" onSubmit={this.handleSubmit}>
                 <Grid container spacing={2}>
-                <Grid item>
-                <TextField id="standard-basic" label="Name" size="medium" value={this.state.lunchSpot.name} onChange={this.handleChange} />
-                </Grid>
-                <Grid item xs={12}>
-                <TextField id="standard-basic" label="Description" value={this.state.lunchSpot.description} onChange={this.handleChange} />
-                </Grid>
-                <Grid item xs={12}>
-                <TextField id="standard-basic" label="Address" value={this.state.lunchSpot.address} onChange={this.handleChange} />
-                </Grid>
-                <Grid item xs={12}>
-                <TextField id="standard-basic" label="Link" value={this.state.lunchSpot.link} onChange={this.handleChange} />
-                </Grid>
+                    <Grid item xs={12}>
+                        <TextField id="standard-basic" label="Name" size="medium" name="name" value={this.state.name} onChange={this.handleChange} />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField id="standard-basic" label="Description" name="description" value={this.state.description} onChange={this.handleChange} />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField id="standard-basic" label="Address" name="address" value={this.state.address} onChange={this.handleChange} />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField id="standard-basic" label="Link" name="link" value={this.state.link} onChange={this.handleChange} />
+                    </Grid>
                 </Grid>
                 <Button color="primary" type="submit" value="Submit">Submit</Button>
+                <Button color="primary" onClick={() => this.props.toggleViewMethod(false)}>Cancel</Button>
             </form>
-
-
         )
     }
 }

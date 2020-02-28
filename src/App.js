@@ -32,9 +32,12 @@ class App extends Component {
     this.setState({randomLunchSpot: randomLunchSpot})
   }
 
-  showForm = () => {
-    this.setState({addNewSpot:true})
-    console.log(this.state.addNewSpot)
+  showForm = (show) => {
+    if(show){
+      this.setState({addNewSpot:true})
+    } else {
+      this.setState({addNewSpot:false})
+    }
   }
 
   render() {
@@ -45,7 +48,7 @@ class App extends Component {
         </Grid>
         <Grid container item xs={12}>
           {this.state.addNewSpot ? (
-            <Form />
+            <Form toggleViewMethod={this.showForm} />
           ) : (
             <Lunchspot my={10} data={this.state.randomLunchSpot} />
           )}
@@ -54,7 +57,7 @@ class App extends Component {
           <Button m={10} variant="contained" color="primary" onClick={this.lunchSpotRandomizer}>
             Find me a spot!
           </Button>
-          <Button m={10} variant="contained" onClick={this.showForm}>
+          <Button m={10} variant="contained" onClick={() => this.showForm(true)}>
             Add a new restaurant
           </Button>
         </Grid>

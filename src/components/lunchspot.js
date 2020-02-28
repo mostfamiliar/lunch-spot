@@ -17,12 +17,6 @@ import Badge from '@material-ui/core/Badge';
 class Lunchspot extends React.Component {
     constructor(props){
         super(props)
-        // this.state = {
-        //     id: props.data.id,
-        //     name: props.data.name,
-        //     description: props.data.description,
-        //     votes: props.data.votes
-        // }
     }
 
     render() {
