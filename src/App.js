@@ -25,7 +25,6 @@ class App extends Component {
   lunchSpotRandomizer = () => {
     let randomLunchSpot = this.state.lunchSpots[Math.floor(Math.random() * this.state.lunchSpots.length)]
     this.setState({randomLunchSpot: randomLunchSpot})
-    console.log(this.state)
   }
 
   render() {

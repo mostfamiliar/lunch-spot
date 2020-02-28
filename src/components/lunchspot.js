@@ -18,12 +18,12 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 class Lunchspot extends React.Component {
     constructor(props){
         super(props)
-        this.state = {
-            id: null,
-            name: null,
-            description: null,
-            votes: null
-        }
+        // this.state = {
+        //     id: props.data.id,
+        //     name: props.data.name,
+        //     description: props.data.description,
+        //     votes: props.data.votes
+        // }
     }
 
     render() {
@@ -63,18 +63,12 @@ class Lunchspot extends React.Component {
                   <MoreVertIcon />
                 </IconButton>
               }
-              title="Shrimp and Chorizo Paella"
+              title={this.props.data.name}
               subheader="September 14, 2016"
-            />
-            <CardMedia
-              className={classes.media}
-              image="/static/images/cards/paella.jpg"
-              title="Paella dish"
             />
             <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
-                This impressive paella is a perfect party dish and a fun meal to cook together with your
-                guests. Add 1 cup of frozen peas along with the mussels, if you like.
+                {this.props.data.description}
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
