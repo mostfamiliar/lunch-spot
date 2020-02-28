@@ -10,13 +10,16 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import RestaurantIcon from '@material-ui/icons/Restaurant';
 import Badge from '@material-ui/core/Badge';
 
 
 class Lunchspot extends React.Component {
     constructor(props){
         super(props)
+        this.state = {
+            letter: ""
+        }
     }
 
     render() {
@@ -48,13 +51,8 @@ class Lunchspot extends React.Component {
             <CardHeader
               avatar={
                 <Avatar aria-label="recipe" className={classes.avatar}>
-                  R
+                 <RestaurantIcon />
                 </Avatar>
-              }
-              action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon />
-                </IconButton>
               }
               title={this.props.data.name}
               subheader={this.props.data.address}

@@ -51,6 +51,7 @@ class Form extends React.Component {
     }
     
     render() {
+        //API error handling
         if (this.state.error) {
             return <h1>Sorry an issue has been encountered.</h1>
         }

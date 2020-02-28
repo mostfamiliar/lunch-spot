@@ -4,7 +4,6 @@ import Form from './components/form'
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import { Grid } from '@material-ui/core';
-import { spacing } from '@material-ui/system';
 import './App.css';
 
 class App extends Component {
@@ -28,11 +27,13 @@ class App extends Component {
     });
   }
 
+  // Grab random lunch spot and set state
   lunchSpotRandomizer = () => {
     let randomLunchSpot = this.state.lunchSpots[Math.floor(Math.random() * this.state.lunchSpots.length)]
     this.setState({randomLunchSpot: randomLunchSpot})
   }
 
+  // Update state after form submitted
   updateLunchSpots = (newSpot) => {
     this.setState(state => {
       const spots = state.lunchSpots.push(newSpot);
@@ -42,6 +43,7 @@ class App extends Component {
     });
   }
 
+  // Toggle add new spot form
   showForm = (show) => {
     if(show){
       this.setState({addNewSpot:true})
@@ -51,6 +53,7 @@ class App extends Component {
   }
 
   render() {
+    // API error handdling
     if (this.state.error) {
       return <h1>Sorry an issue has been encountered.</h1>
     }
