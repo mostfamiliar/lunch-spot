@@ -1,8 +1,7 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import { Grid, Button } from '@material-ui/core';
 
 class Form extends React.Component {
     constructor(props){
@@ -29,8 +28,9 @@ class Form extends React.Component {
         });
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault();
+    handleSubmit = (e) => {
+        e.preventDefault();
+
         fetch("http://localhost:8888/suggestions", {
             method: 'post',
             headers: {
@@ -56,7 +56,6 @@ class Form extends React.Component {
             return <h1>Sorry an issue has been encountered.</h1>
         }
         return (
-
             <ValidatorForm ref="form" onSubmit={this.handleSubmit} onError={errors => console.log(errors)}>
                 <Grid container spacing={2} width="75%">
                     <Grid container item xs={12} >
@@ -78,5 +77,10 @@ class Form extends React.Component {
         )
     }
 }
+
+Form.propTypes = {
+    toggleViewMethod: PropTypes.func,
+    newSpot: PropTypes.func,
+  };
 
 export default Form

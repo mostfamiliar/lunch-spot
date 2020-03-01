@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import Lunchspot from './components/lunchspot'
-import Form from './components/form'
-import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
-import { Grid } from '@material-ui/core';
+import Lunchspot from './components/Lunchspot'
+import Form from './components/Form'
+import { Container, Button, Grid, Paper, Box } from '@material-ui/core';
 import './App.css';
 
 class App extends Component {
@@ -19,7 +17,7 @@ class App extends Component {
     fetch("http://localhost:8888/suggestions")
     .then((response) => response.json())
     .then((results) => {
-      this.state.lunchSpots = results
+      this.setState({lunchSpots: results})
       this.lunchSpotRandomizer()
     })
     .catch((error) => {
@@ -52,33 +50,33 @@ class App extends Component {
     }
   }
 
-  render() {
-    // API error handdling
+  render() {    
+    // API error handling
     if (this.state.error) {
       return <h1>Sorry an issue has been encountered.</h1>
     }
     return (
-      <Container maxWidth="sm">
-      <Grid container padding="auto" spacing={3} justify="center">
-        <Grid container item xs={12}>
-          <h1>WHERE TO LUNCH?</h1>
+      <Container component="main" maxWidth="sm">
+        <Grid container spacing={2} justify="center">
+          <Grid item xs={12}>
+            <h1>WHERE TO LUNCH?</h1>
+          </Grid>
+          <Grid item xs={12}>
+            {this.state.addNewSpot ? (
+              <Form toggleViewMethod={this.showForm} newSpot={this.updateLunchSpots} />
+            ) : (
+            <Paper><Lunchspot my={10} data={this.state.randomLunchSpot} /></Paper> 
+            )}
+          </Grid>
+          <Grid item xs={12} paddingTop={12}>
+              <Button style={{ marginRight: 10 }} variant="contained" color="primary" onClick={this.lunchSpotRandomizer}>
+                Find me a spot!
+              </Button>
+              <Button margin={22} variant="contained" onClick={() => this.showForm(true)}>
+                Add a new restaurant
+              </Button>
+          </Grid>
         </Grid>
-        <Grid container item xs={12}>
-          {this.state.addNewSpot ? (
-            <Form toggleViewMethod={this.showForm} newSpot={this.updateLunchSpots} />
-          ) : (
-            <Lunchspot my={10} data={this.state.randomLunchSpot} />
-          )}
-        </Grid>
-        <Grid container item xs={12}>
-          <Button variant="contained" color="primary" onClick={this.lunchSpotRandomizer}>
-            Find me a spot!
-          </Button>
-          <Button variant="contained" onClick={() => this.showForm(true)}>
-            Add a new restaurant
-          </Button>
-        </Grid>
-      </Grid>
       </Container>
     );
   }
