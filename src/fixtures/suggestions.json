@@ -1,0 +1,18 @@
+[
+    {
+        "id": "1",
+        "name": "Shalom Y'all",
+        "description": "Delicious Israeli food",
+        "address": "117 SE Taylor #101, Portland, OR 97214",
+        "link": "https://www.shalomyallpdx.com/",
+        "votes": 3
+    },
+    {
+        "id": "2",
+        "name": "Kati Thai",
+        "description": "Vegetarian Thai food",
+        "address": "2932 SE Division St, Portland, OR 97202",
+        "link": "http://www.katiportland.com/",
+        "votes": 5
+    }
+]

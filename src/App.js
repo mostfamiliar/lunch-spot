@@ -68,7 +68,7 @@ class App extends Component {
               <Paper><Lunchspot data={this.state.randomLunchSpot} /></Paper> 
             )}
           </Grid>
-          <Grid item xs={12} paddingTop={12}>
+          <Grid item xs={12}>
               <Button style={{ marginRight: 10 }} variant="contained" color="primary" onClick={this.lunchSpotRandomizer}>
                 Find me a spot!
               </Button>

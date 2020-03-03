@@ -14,12 +14,10 @@ class Form extends React.Component {
         }
 
         this.error = null;
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event) {
-        const target = event.target;
+    handleChange = (e) => {
+        const target = e.target;
         const value = target.value
         const name = target.name;
     
