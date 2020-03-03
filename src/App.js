@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Lunchspot from './components/Lunchspot'
 import Form from './components/Form'
-import { Container, Button, Grid, Paper, Box } from '@material-ui/core';
+import { Container, Button, Grid, Paper } from '@material-ui/core';
 import './App.css';
 
 class App extends Component {
@@ -65,7 +65,7 @@ class App extends Component {
             {this.state.addNewSpot ? (
               <Form toggleViewMethod={this.showForm} newSpot={this.updateLunchSpots} />
             ) : (
-            <Paper><Lunchspot my={10} data={this.state.randomLunchSpot} /></Paper> 
+              <Paper><Lunchspot data={this.state.randomLunchSpot} /></Paper> 
             )}
           </Grid>
           <Grid item xs={12} paddingTop={12}>
